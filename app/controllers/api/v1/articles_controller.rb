@@ -1,6 +1,8 @@
 module Api
   module V1
     class ArticlesController < ApplicationController
+
+      # View all available articles
       def index
         articles = Article.order('created_at DESC')
         render json: {status: "SUCCESS",
@@ -8,6 +10,7 @@ module Api
                       data:articles}, status: :ok
       end
 
+      # View single available article
       def show
         article = Article.find(params[:id])
         render json: {status: "SUCCESS",
@@ -15,6 +18,7 @@ module Api
                       data:article}, status: :ok
       end
 
+      # Add a new article
       def create
         article = Article.new(article_params)
         if article.save
@@ -28,6 +32,7 @@ module Api
         end
       end
 
+      # Delete a single article
       def destroy
         article = Article.find(params[:id])
         article.destroy
@@ -36,6 +41,7 @@ module Api
                       data:article}, status: :ok
       end
 
+      # Update a single available article
       def update
         article = Article.find(params[:id])
         if article.update_attributes(article_params)
